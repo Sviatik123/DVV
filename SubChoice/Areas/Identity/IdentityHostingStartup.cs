@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SubChoice.Data;
 
 [assembly: HostingStartup(typeof(SubChoice.Areas.Identity.IdentityHostingStartup))]
 namespace SubChoice.Areas.Identity
