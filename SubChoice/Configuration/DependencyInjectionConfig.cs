@@ -27,7 +27,7 @@ namespace SubChoice.Configuration
             services.AddScoped<IAuthService, AuthService>();
 
             // Repositories
-            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddScoped<IRepoWrapper, RepoWrapper>();
         }
     }
 }
