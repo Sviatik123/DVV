@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using SubChoice.Controllers;
+using SubChoice.Core.Configuration;
 using SubChoice.Core.Data.Dto;
 using SubChoice.Core.Interfaces.Services;
 using Xunit;
@@ -46,6 +48,50 @@ namespace SubChoice.Tests.Controllers
             //Assert
             Assert.NotNull(result);
             Assert.IsType<RedirectToActionResult>(result);
+        }
+
+        [Fact]
+        public async Task LoginPost_InvalidModelState_TestAsync()
+        {
+            //Arrange
+            _authService.Setup(x => x.SignInAsync(It.IsAny<LoginDto>())).ReturnsAsync(SignInResult.Success);
+
+            //Act
+            _authController.ModelState.AddModelError("", "some error");
+            var result = await _authController.Login(new LoginDto());
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<ViewResult>(result);
+        }
+
+        [Fact]
+        public async Task RegisterPost_RegisterNotSucceeded_TestAsync()
+        {
+            //Arrange
+            _authService.Setup(x => x.CreateUserAsync(It.IsAny<RegisterDto>())).ReturnsAsync(new IdentityResult());
+
+            //Act
+            var result = await _authController.Register(new RegisterDto());
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<ViewResult>(result);
+        }
+
+        [Fact]
+        public async Task RegisterPost_InvalidModelState_TestAsync()
+        {
+            //Arrange
+            _authService.Setup(x => x.CreateUserAsync(It.IsAny<RegisterDto>())).ReturnsAsync(IdentityResult.Success);
+
+            //Act
+            _authController.ModelState.AddModelError("", "some error");
+            var result = await _authController.Register(new RegisterDto());
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<ViewResult>(result);
         }
 
     }
