@@ -6,8 +6,8 @@ namespace SubChoice.Core.Configuration
 {
     public static class Roles
     {
-        public const string Administrators = "Administrators";
-        public const string Teachers = "Teachers";
-        public const string Students = "Students";
+        public const string Administrator = "Administrator";
+        public const string Teacher = "Teacher";
+        public const string Student = "Student";
     }
 }

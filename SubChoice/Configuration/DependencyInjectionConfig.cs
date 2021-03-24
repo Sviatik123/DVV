@@ -10,8 +10,10 @@ using SubChoice.Core.Configuration;
 using SubChoice.Core.Data.Entities;
 using SubChoice.Core.Interfaces.DataAccess;
 using SubChoice.Core.Interfaces.DataAccess.Base;
+using SubChoice.Core.Interfaces.Services;
 using SubChoice.DataAccess;
 using SubChoice.DataAccess.Repositories;
+using SubChoice.Services;
 
 namespace SubChoice.Configuration
 {
@@ -22,7 +24,7 @@ namespace SubChoice.Configuration
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // Services
-            
+            services.AddScoped<IAuthService, AuthService>();
 
             // Repositories
             services.AddTransient<IUserRepository, UserRepository>();

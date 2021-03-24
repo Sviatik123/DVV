@@ -31,7 +31,10 @@ namespace SubChoice
         {
             DependencyInjectionConfig.Init(services);
             DatabaseConfig.Init(services, Configuration);
-
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()
+                .Where(x =>
+                    x.FullName != null && (x.FullName.Equals("SubChoice.Services, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null") ||
+                                           x.FullName.Equals("SubChoice, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"))));
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

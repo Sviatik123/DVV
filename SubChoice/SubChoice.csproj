@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SubChoice.Core\SubChoice.Core.csproj" />
     <ProjectReference Include="..\SubChoice.DataAccess\SubChoice.DataAccess.csproj" />
+    <ProjectReference Include="..\SubChoice.Services\SubChoice.Services.csproj" />
   </ItemGroup>
 
 </Project>

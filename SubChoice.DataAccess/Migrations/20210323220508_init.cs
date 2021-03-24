@@ -163,17 +163,17 @@ namespace SubChoice.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { new Guid("0e575c95-8003-4920-bfcc-c6803decc482"), "a168fe73-bdd8-4d15-9f2f-7c38fdda54b6", "Administrators", "ADMINISTRATORS" });
+                values: new object[] { new Guid("0e575c95-8003-4920-bfcc-c6803decc482"), "a168fe73-bdd8-4d15-9f2f-7c38fdda54b6", "Administrator", "ADMINISTRATORS" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { new Guid("efcef2b3-8fae-45f1-8452-97c26292226b"), "23bde7c8-43f6-47c6-8614-89c610f3f9e9", "Teachers", "TEACHERS" });
+                values: new object[] { new Guid("efcef2b3-8fae-45f1-8452-97c26292226b"), "23bde7c8-43f6-47c6-8614-89c610f3f9e9", "Teacher", "TEACHERS" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { new Guid("986d8317-ed04-464a-921c-c3866a488566"), "c7a901e8-6c4b-4a30-9cc2-9b20a7bf1c39", "Students", "STUDENTS" });
+                values: new object[] { new Guid("986d8317-ed04-464a-921c-c3866a488566"), "c7a901e8-6c4b-4a30-9cc2-9b20a7bf1c39", "Student", "STUDENTS" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

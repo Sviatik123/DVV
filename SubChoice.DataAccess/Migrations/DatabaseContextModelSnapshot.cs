@@ -68,12 +68,10 @@ namespace SubChoice.DataAccess.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -109,12 +107,10 @@ namespace SubChoice.DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -156,22 +152,22 @@ namespace SubChoice.DataAccess.Migrations
                         {
                             Id = new Guid("0e575c95-8003-4920-bfcc-c6803decc482"),
                             ConcurrencyStamp = "a168fe73-bdd8-4d15-9f2f-7c38fdda54b6",
-                            Name = "Administrators",
-                            NormalizedName = "ADMINISTRATORS"
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = new Guid("efcef2b3-8fae-45f1-8452-97c26292226b"),
                             ConcurrencyStamp = "23bde7c8-43f6-47c6-8614-89c610f3f9e9",
-                            Name = "Teachers",
-                            NormalizedName = "TEACHERS"
+                            Name = "Teacher",
+                            NormalizedName = "TEACHER"
                         },
                         new
                         {
                             Id = new Guid("986d8317-ed04-464a-921c-c3866a488566"),
                             ConcurrencyStamp = "c7a901e8-6c4b-4a30-9cc2-9b20a7bf1c39",
-                            Name = "Students",
-                            NormalizedName = "STUDENTS"
+                            Name = "Student",
+                            NormalizedName = "STUDENT"
                         });
                 });
 
