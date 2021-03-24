@@ -48,5 +48,20 @@ namespace SubChoice.Tests.Controllers
             Assert.IsType<RedirectToActionResult>(result);
         }
 
+        [Fact]
+        public async Task LoginPost_InvalidModelState_TestAsync()
+        {
+            //Arrange
+            _authService.Setup(x => x.SignInAsync(It.IsAny<LoginDto>())).ReturnsAsync(SignInResult.Success);
+
+            //Act
+            _authController.ModelState.AddModelError("", "some error");
+            var result = await _authController.Login(new LoginDto());
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<ViewResult>(result);
+        }
+
     }
 }
