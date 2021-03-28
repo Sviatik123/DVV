@@ -75,7 +75,7 @@ body {
     border-radius: 15px;
     background: #ddd;
     box-shadow: 2px 4px 4px 0px rgba(34, 60, 50, 0.3);
-    padding: 20px 10px;
+    color: black;
 }
 
 .btn-login {
