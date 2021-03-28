@@ -3,14 +3,11 @@
 @{
     ViewData["Title"] = "Log in";
 }
-
-<h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-4">
-        <section>
+<div class="container">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+    <div class="row">
+        <div class="col-md-6 offset-3">
             <form asp-controller="Auth" asp-action="Login" method="post">
-                <h4>Use a local account to log in.</h4>
-                <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Email"></label>
@@ -30,13 +27,14 @@
                         </label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Log in</button>
+                <div class="form-group d-flex justify-content-end">
+                    <button type="submit" class="btn btn-login">Log in</button>
                 </div>
             </form>
-        </section>
+        </div>
     </div>
 </div>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
