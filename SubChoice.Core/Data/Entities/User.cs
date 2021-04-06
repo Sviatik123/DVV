@@ -27,5 +27,8 @@ namespace SubChoice.Core.Data.Entities
         public DateTime ModifiedOn { get; set; }
         public Guid CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
+
+        public Teacher Teacher { get; set; }
+        public Student Student { get; set; }
     }
 }

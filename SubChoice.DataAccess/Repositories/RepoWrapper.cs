@@ -14,9 +14,11 @@ namespace SubChoice.DataAccess.Repositories
         {
             _context = context;
             Users = new UserRepository(_context);
+            Subjects = new SubjectRepository(_context);
         }
 
         public IUserRepository Users { get; }
+        public ISubjectRepository Subjects { get; }
 
         public int SaveChanges()
         {
