@@ -22,8 +22,8 @@ namespace SubChoice.Services
         }
         public async Task<SignInResult> SignInAsync(LoginDto loginDto)
         {
-            var user = _userManager.FindByEmailAsync(loginDto.Email);
-            var result = await _signInManager.PasswordSignInAsync(user.Result, loginDto.Password, loginDto.RememberMe, true);
+            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+            var result = await _signInManager.PasswordSignInAsync(user, loginDto.Password, loginDto.RememberMe, true);
             return result;
         }
 
