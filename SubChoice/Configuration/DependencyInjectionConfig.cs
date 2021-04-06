@@ -25,6 +25,7 @@ namespace SubChoice.Configuration
 
             // Services
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ISubjectService, SubjectService>();
 
             // Repositories
             services.AddScoped<IRepoWrapper, RepoWrapper>();

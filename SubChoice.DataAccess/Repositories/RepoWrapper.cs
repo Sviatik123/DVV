@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using SubChoice.Core.Interfaces.DataAccess;
 
 namespace SubChoice.DataAccess.Repositories
@@ -15,19 +12,16 @@ namespace SubChoice.DataAccess.Repositories
             _context = context;
             Users = new UserRepository(_context);
             Subjects = new SubjectRepository(_context);
+            StudentSubjects = new StudentSubjectRepository(_context);
         }
 
         public IUserRepository Users { get; }
         public ISubjectRepository Subjects { get; }
+        public IStudentSubjectRepository StudentSubjects { get; }
 
         public int SaveChanges()
         {
             return _context.SaveChanges();
-        }
-
-        public async Task<int> SaveChangesAsync()
-        {
-            return await _context.SaveChangesAsync();
         }
 
         public void Dispose()

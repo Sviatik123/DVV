@@ -3,7 +3,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using SubChoice.Core.Data.Dto;
 using SubChoice.Core.Data.Entities;
-using SubChoice.Core.Interfaces.DataAccess;
 using SubChoice.Core.Interfaces.Services;
 
 namespace SubChoice.Services
