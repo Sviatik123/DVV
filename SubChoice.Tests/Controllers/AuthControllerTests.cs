@@ -19,7 +19,7 @@ namespace SubChoice.Tests.Controllers
         public AuthControllerTests()
         {
             _authService = new Mock<IAuthService>();
-            _authController = new AuthController(_authService.Object);
+            _authController = new AuthController(_authService.Object, null);
         }
 
         [Fact]

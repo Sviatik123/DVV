@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Subjects\Index.cshtml" />
+    <Content Remove="Views\Subjects\IndexAsync.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Subjects\Index.cshtml" />
+    <None Include="Views\Subjects\IndexAsync.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
