@@ -68,7 +68,7 @@ namespace SubChoice.DataAccess.Migrations
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     StudentsLimit = table.Column<int>(nullable: false),
-                    TeacherId = table.Column<Guid>(nullable: false)
+                    TeacherId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {

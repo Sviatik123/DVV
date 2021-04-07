@@ -253,7 +253,7 @@ namespace SubChoice.DataAccess.Migrations
                     b.Property<int>("StudentsLimit")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("TeacherId")
+                    b.Property<Guid?>("TeacherId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -472,8 +472,7 @@ namespace SubChoice.DataAccess.Migrations
                     b.HasOne("SubChoice.Core.Data.Entities.Teacher", "Teacher")
                         .WithMany("Subjects")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("SubChoice.Core.Data.Entities.Teacher", b =>
