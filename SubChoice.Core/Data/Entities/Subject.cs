@@ -9,7 +9,7 @@ namespace SubChoice.Core.Data.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public int StudentsLimit { get; set; }
-        public Guid TeacherId { get; set; }
+        public Guid? TeacherId { get; set; }
         public virtual Teacher Teacher { get; set; }
         public virtual ICollection<StudentSubject> StudentSubjects { get; set; }
     }

@@ -7,6 +7,7 @@ using SubChoice.Core.Configuration;
 using SubChoice.Core.Data.Dto;
 using SubChoice.Core.Data.Entities;
 using SubChoice.Core.Interfaces.Services;
+using SubChoice.Services;
 
 namespace SubChoice.Controllers
 {
@@ -15,9 +16,12 @@ namespace SubChoice.Controllers
     {
         private IAuthService _authService;
         List<string> roles = new List<string>() { Roles.Student, Roles.Teacher };
-        public AuthController(IAuthService authService)
+
+        private ILoggerService _loggerService;
+        public AuthController(IAuthService authService, ILoggerService loggerService)
         {
             _authService = authService;
+            _loggerService = loggerService;
         }
 
         [HttpGet]
@@ -44,10 +48,11 @@ namespace SubChoice.Controllers
                         var resultOfSignIn = await _authService.SignInAsync(new LoginDto()
                             {Email = model.Email, Password = model.Password, RememberMe = false});
                         if (resultOfSignIn.Succeeded)
+                            _loggerService.LogInfo($"User {@model.Email} registered");
                             return RedirectToAction("Index", "Home");
                     }
                 }
-
+                _loggerService.LogError($"Invalid login or password");
                 ModelState.AddModelError("", "Invalid login or password");
             }
             SelectList rolesList = new SelectList(roles);
@@ -68,9 +73,11 @@ namespace SubChoice.Controllers
                 var result = await _authService.SignInAsync(model);
                 if (result.Succeeded)
                 {
+                    _loggerService.LogInfo($"User {@model.Email} logged in");
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("", "Invalid login or password");
+                _loggerService.LogError($"Invalid login or password");
             }
             return View(model);
         }
