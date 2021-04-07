@@ -9,12 +9,7 @@ namespace SubChoice.Services
 {
     public class LoggerService : ILoggerService
     {
-        public LoggerService()
-        {
-            //Log.Logger = new LoggerConfiguration()
-            //.WriteTo.File("Logs/log.txt")
-            //.CreateLogger();
-        }
+        public LoggerService() { }
 
         public void LogInfo(string msg)
         {

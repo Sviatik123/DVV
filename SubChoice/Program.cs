@@ -15,9 +15,13 @@ namespace SubChoice
     {
         public static void Main(string[] args)
         {
+            var configuration = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json")
+            .Build();
+
             Log.Logger = new LoggerConfiguration()
-            .WriteTo.File("Logs/log.txt")
-            .CreateLogger();
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
 
             try
             {
