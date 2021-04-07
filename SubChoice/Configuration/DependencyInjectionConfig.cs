@@ -24,7 +24,9 @@ namespace SubChoice.Configuration
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // Services
+            services.AddScoped<ILoggerService, LoggerService>();
             services.AddScoped<IAuthService, AuthService>();
+            
             services.AddScoped<ISubjectService, SubjectService>();
 
             // Repositories
