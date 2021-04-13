@@ -23,6 +23,14 @@ namespace SubChoice.Services
             _repository = repository;
         }
 
+        public async Task<List<Subject>> GetAllSubjects()
+        {
+            return await ExecuteAsync(() =>
+            {
+                return _repository.Subjects.SelectAll().ToList();
+            });
+        }
+
         public async Task<Subject> CreateSubject(SubjectData data)
         {
             return await ExecuteAsync(() =>
