@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SubChoice.Core.Interfaces.Services;
 using SubChoice.Models;
+using SubChoice.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,18 +14,21 @@ namespace SubChoice.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private ISubjectService _subjectService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ISubjectService subjectService)
         {
             _logger = logger;
+            _subjectService = subjectService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            
+            return View("Subjects");
         }
 
-        public IActionResult Privacy()
+        public IActionResult MySubjects()
         {
             return View();
         }
