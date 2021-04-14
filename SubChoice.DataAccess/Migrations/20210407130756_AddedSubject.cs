@@ -17,7 +17,7 @@ namespace SubChoice.DataAccess.Migrations
                     CreatedBy = table.Column<Guid>(nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedBy = table.Column<Guid>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -40,7 +40,7 @@ namespace SubChoice.DataAccess.Migrations
                     CreatedBy = table.Column<Guid>(nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedBy = table.Column<Guid>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -68,7 +68,7 @@ namespace SubChoice.DataAccess.Migrations
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     StudentsLimit = table.Column<int>(nullable: false),
-                    TeacherId = table.Column<Guid>(nullable: true)
+                    TeacherId = table.Column<Guid>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -86,7 +86,7 @@ namespace SubChoice.DataAccess.Migrations
                 columns: table => new
                 {
                     StudentId = table.Column<Guid>(nullable: false),
-                    SubjectId = table.Column<int>(nullable: false)
+                    SubjectId = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {

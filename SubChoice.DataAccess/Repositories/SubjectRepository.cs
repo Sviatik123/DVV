@@ -9,7 +9,8 @@ namespace SubChoice.DataAccess.Repositories
 {
     public class SubjectRepository : GenericRepository<Subject, int>, ISubjectRepository
     {
-        public SubjectRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public SubjectRepository(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
         }
 
@@ -29,6 +30,5 @@ namespace SubChoice.DataAccess.Repositories
                 .ThenInclude(ss => ss.Student)
                 .Where(s => s.StudentSubjects.Select(ss => ss.StudentId).Contains(studentId));
         }
-
     }
 }

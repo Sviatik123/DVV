@@ -19,7 +19,9 @@ namespace SubChoice.DataAccess.Repositories
         }
 
         protected IQueryable<TEntity> Table => _table.AsNoTracking().Where(x => x.InactiveAt == null).OrderBy(x => x.ModifiedOn).AsQueryable();
+
         protected IQueryable<TEntity> TableTracking => _table.Where(x => x.InactiveAt == null).OrderBy(x => x.ModifiedOn).AsQueryable();
+
         protected IUnitOfWork UnitOfWork { get; }
 
         public IQueryable<TEntity> SelectAll(bool isTrackable = false)
@@ -32,11 +34,12 @@ namespace SubChoice.DataAccess.Repositories
             var entity = _table.Find(id);
 
             if (entity?.InactiveAt != null)
+            {
                 entity = null;
+            }
 
-            //if (entity == null && throwNotFound)
-            //    EntityNotFoundException.ThrowMe(typeof(TEntity).Name, nameof(IIdentifiable<TEntityIdType>.Id), id.ToString());
-
+            // if (entity == null && throwNotFound)
+            // EntityNotFoundException.ThrowMe(typeof(TEntity).Name, nameof(IIdentifiable<TEntityIdType>.Id), id.ToString());
             return entity;
         }
 
@@ -53,7 +56,6 @@ namespace SubChoice.DataAccess.Repositories
             return entity.Entity;
         }
 
-
         public TEntity Replace(TEntity entityToReplace, TEntity entity)
         {
             entity.Id = entityToReplace.Id;
@@ -67,9 +69,8 @@ namespace SubChoice.DataAccess.Repositories
         {
             var entity = _table.Find(id);
 
-            //if (entity == null && throwNotFound)
-            //    EntityNotFoundException.ThrowMe(nameof(TEntity), nameof(IIdentifiable<TEntityIdType>.Id), id.ToString());
-
+            // if (entity == null && throwNotFound)
+            // EntityNotFoundException.ThrowMe(nameof(TEntity), nameof(IIdentifiable<TEntityIdType>.Id), id.ToString());
             _table.Remove(entity);
 
             return entity;
@@ -94,7 +95,8 @@ namespace SubChoice.DataAccess.Repositories
             UnitOfWork.SaveChanges();
         }
 
-        protected IQueryable<TTable> GetTable<TTable>() where TTable : class, IInactivebleAt, ISaveTrackable
+        protected IQueryable<TTable> GetTable<TTable>()
+            where TTable : class, IInactivebleAt, ISaveTrackable
             => UnitOfWork.Set<TTable>().AsNoTracking().Where(x => x.InactiveAt == null).OrderBy(x => x.ModifiedOn).AsQueryable();
     }
 }

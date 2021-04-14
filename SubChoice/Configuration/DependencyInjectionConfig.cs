@@ -26,7 +26,6 @@ namespace SubChoice.Configuration
             // Services
             services.AddScoped<ILoggerService, LoggerService>();
             services.AddScoped<IAuthService, AuthService>();
-            
             services.AddScoped<ISubjectService, SubjectService>();
 
             // Repositories

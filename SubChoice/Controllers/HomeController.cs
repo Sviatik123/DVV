@@ -2,12 +2,7 @@
 using Microsoft.Extensions.Logging;
 using SubChoice.Core.Interfaces.Services;
 using SubChoice.Models;
-using SubChoice.Services;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SubChoice.Controllers
 {
@@ -24,7 +19,6 @@ namespace SubChoice.Controllers
 
         public IActionResult Index()
         {
-            
             return View("Subjects");
         }
 

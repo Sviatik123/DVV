@@ -8,7 +8,6 @@ namespace SubChoice.Tests
         [Fact]
         public void Test1()
         {
-
         }
     }
 }
