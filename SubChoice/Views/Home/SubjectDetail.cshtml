@@ -1,0 +1,14 @@
+@{ 
+    var subject = (SubChoice.Core.Data.Entities.Subject)ViewData["Subject"];
+}
+<div class="container">
+    <div class="d-flex justify-content-between">
+        <h1 class="text-center">@subject.Name</h1>
+        <p>@subject.StudentSubjects.Count/@subject.StudentsLimit</p>
+    </div>
+    <h4>@subject.Teacher.User.DisplayName</h4>
+    <b class="pt-5">Description</b>
+    <p class="pt-5">
+        @subject.Description
+    </p>
+</div>

@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using SubChoice.Core.Data.Dto;
 using SubChoice.Core.Data.Entities;
 using SubChoice.Core.Extensions;
 using SubChoice.Core.Interfaces.DataAccess;
 using SubChoice.Core.Interfaces.Services;
 using SubChoice.Core.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SubChoice.Services
 {
@@ -23,11 +23,21 @@ namespace SubChoice.Services
             _repository = repository;
         }
 
-        public async Task<List<Subject>> GetAllSubjects()
+        public async Task<List<Subject>> SelectAllSubjects()
         {
             return await ExecuteAsync(() =>
             {
-                return _repository.Subjects.SelectAll().ToList();
+                var subjects = _repository.Subjects.SelectAll();
+                return subjects.ToList();
+            });
+        }
+
+        public async Task<Subject> SelectById(int id)
+        {
+            return await ExecuteAsync(() =>
+            {
+                var subject = _repository.Subjects.SelectById(id);
+                return subject;
             });
         }
 

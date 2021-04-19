@@ -7,6 +7,9 @@ namespace SubChoice.Core.Interfaces.DataAccess
         IUserRepository Users { get; }
         ISubjectRepository Subjects { get; }
         IStudentSubjectRepository StudentSubjects { get; }
+        IStudentRepository Students { get; }
+        ITeacherRepository Teachers { get; }
+
         int SaveChanges();
     }
 }
