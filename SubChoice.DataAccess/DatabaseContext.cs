@@ -19,19 +19,26 @@ namespace SubChoice.DataAccess
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public DatabaseContext(DbContextOptions<DatabaseContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options, IHttpContextAccessor httpContextAccessor)
+            : base(options)
         {
             _httpContextAccessor = httpContextAccessor;
         }
 
         public new DbSet<User> Users { get; set; }
+
         public new DbSet<Role> Roles { get; set; }
+
         public DbSet<Teacher> Teachers { get; set; }
+
         public DbSet<Student> Students { get; set; }
+
         public DbSet<Subject> Subjects { get; set; }
+
         public DbSet<StudentSubject> StudentSubjects { get; set; }
 
-        public new EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class
+        public new EntityEntry<TEntity> Entry<TEntity>(TEntity entity)
+            where TEntity : class
         {
             return base.Entry(entity);
         }
@@ -79,8 +86,6 @@ namespace SubChoice.DataAccess
                 .WithMany(s => s.StudentSubjects)
                 .HasForeignKey(ss => ss.StudentId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-
         }
 
         public override int SaveChanges()
@@ -131,7 +136,8 @@ namespace SubChoice.DataAccess
                         throw; // give up
                     }
                 }
-            } while (conflict);
+            }
+            while (conflict);
 
             return res;
         }

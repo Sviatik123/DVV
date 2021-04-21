@@ -9,17 +9,14 @@ namespace SubChoice.Core.Data.Entities
 {
     public interface IBaseEntity
     {
-
     }
 
     public interface IBaseEntity<TEntity> : IBaseEntity
     {
-
     }
 
     public abstract class BaseEntity : IBaseEntity
     {
-
     }
 
     public class EmptyEntity : BaseEntity
@@ -54,6 +51,5 @@ namespace SubChoice.Core.Data.Entities
         [Required]
         [Column(TypeName = "datetime2", Order = 105)]
         public DateTime ModifiedOn { get; set; }
-
     }
 }

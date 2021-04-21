@@ -9,7 +9,7 @@ using SubChoice.Core.Interfaces.Services;
 
 namespace SubChoice.Services
 {
-    public class AuthService: IAuthService
+    public class AuthService : IAuthService
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
@@ -23,30 +23,31 @@ namespace SubChoice.Services
             _mapper = mapper;
             _repository = repository;
         }
+
         public async Task<SignInResult> SignInAsync(LoginDto loginDto)
         {
-            var user = await _userManager.FindByEmailAsync(loginDto.Email);
-            var result = await _signInManager.PasswordSignInAsync(user, loginDto.Password, loginDto.RememberMe, true);
+            var user = await this._userManager.FindByEmailAsync(loginDto.Email);
+            var result = await this._signInManager.PasswordSignInAsync(user, loginDto.Password, loginDto.RememberMe, true);
             return result;
         }
 
         public async Task SignOutAsync()
         {
-            await _signInManager.SignOutAsync();
+            await this._signInManager.SignOutAsync();
         }
 
         public async Task<IdentityResult> CreateUserAsync(RegisterDto registerDto)
         {
-            var user = _mapper.Map<RegisterDto, User>(registerDto);
+            var user = this._mapper.Map<RegisterDto, User>(registerDto);
             user.UserName = registerDto.Email;
-            var result = await _userManager.CreateAsync(user, registerDto.Password);
+            var result = await this._userManager.CreateAsync(user, registerDto.Password);
             return result;
         }
 
         public async Task<IdentityResult> AddRoleAsync(RegisterDto registerDto)
         {
-            var user = await _userManager.FindByEmailAsync(registerDto.Email);
-            return await _userManager.AddToRoleAsync(user, registerDto.Role);
+            var user = await this._userManager.FindByEmailAsync(registerDto.Email);
+            return await this._userManager.AddToRoleAsync(user, registerDto.Role);
         }
 
         public async Task<User> GetUserByEmail(string email)

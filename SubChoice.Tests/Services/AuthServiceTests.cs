@@ -1,5 +1,4 @@
-﻿using SubChoice.Core.Interfaces.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
@@ -13,6 +12,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using SubChoice.Core.Data.Dto;
 using SubChoice.Core.Data.Entities;
+using SubChoice.Core.Interfaces.Services;
 using SubChoice.Services;
 using Xunit;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
@@ -29,7 +29,8 @@ namespace SubChoice.Tests.Services
         public AuthServiceTests()
         {
             var userStore = new Mock<IUserStore<User>>();
-            this.userManager = new Mock<UserManager<User>>(userStore.Object,
+            this.userManager = new Mock<UserManager<User>>(
+                userStore.Object,
                 null, new PasswordHasher<User>(),
                 null, null, new UpperInvariantLookupNormalizer(),
                 new IdentityErrorDescriber(), null,
@@ -37,26 +38,27 @@ namespace SubChoice.Tests.Services
 
             var contextAccessor = new Mock<IHttpContextAccessor>();
             var userPrincipalFactory = new Mock<IUserClaimsPrincipalFactory<User>>();
-            signInManager = new Mock<SignInManager<User>>(userManager.Object,
+            signInManager = new Mock<SignInManager<User>>(
+                userManager.Object,
                 contextAccessor.Object, userPrincipalFactory.Object, null, null, null, null);
 
             this.mapper = new Mock<IMapper>();
-            this.authService = new AuthService(userManager.Object,signInManager.Object,mapper.Object);
+            this.authService = new AuthService(userManager.Object, signInManager.Object, mapper.Object);
         }
 
         [Fact]
         public async Task SignIn_TestAsync()
         {
-            //Arrange
+            // Arrange
             userManager.Setup(x => x.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(new User());
             signInManager
                 .Setup(x => x.PasswordSignInAsync(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<bool>(),
                     It.IsAny<bool>())).ReturnsAsync(SignInResult.Success);
 
-            //Act
+            // Act
             var result = await authService.SignInAsync(new LoginDto());
 
-            //Assert
+            // Assert
             userManager.Verify();
             signInManager.Verify();
             Assert.NotNull(result);
@@ -67,34 +69,35 @@ namespace SubChoice.Tests.Services
         [Fact]
         public async Task SignOut_TestAsync()
         {
-            //Arrange
+            // Arrange
             signInManager
                 .Setup(x => x.SignOutAsync());
 
-            //Act
+            // Act
             await authService.SignOutAsync();
 
-            //Assert
+            // Assert
             signInManager.Verify();
         }
 
         [Fact]
         public async Task CreateUser_TestAsync()
         {
-            //Arrange
+            // Arrange
             mapper.Setup(x => x.Map<RegisterDto, User>(It.IsAny<RegisterDto>())).Returns(new User());
-            userManager.Setup(x => x.CreateAsync(It.IsAny<User>(),It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
+            userManager.Setup(x => x.CreateAsync(It.IsAny<User>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
 
-            //Act
-            var result = await authService.CreateUserAsync(new RegisterDto() {
+            // Act
+            var result = await authService.CreateUserAsync(new RegisterDto()
+            {
                 Email = "maxym@gmail.com",
                 FirstName = "maxym",
                 LastName = "maxym",
                 Password = "maxym123",
-                ConfirmPassword = "maxym123"
+                ConfirmPassword = "maxym123",
             });
 
-            //Assert
+            // Assert
             mapper.Verify();
             userManager.Verify();
             Assert.NotNull(result);
@@ -105,14 +108,14 @@ namespace SubChoice.Tests.Services
         [Fact]
         public async Task AddRole_TestAsync()
         {
-            //Arrange
+            // Arrange
             userManager.Setup(x => x.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(new User());
-            userManager.Setup(x => x.AddToRoleAsync(It.IsAny<User>(),It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
+            userManager.Setup(x => x.AddToRoleAsync(It.IsAny<User>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
 
-            //Act
+            // Act
             var result = await authService.AddRoleAsync(new RegisterDto());
 
-            //Assert
+            // Assert
             userManager.Verify();
             Assert.NotNull(result);
             Assert.IsType<IdentityResult>(result);
