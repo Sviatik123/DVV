@@ -21,6 +21,10 @@ namespace SubChoice.DataAccess.Repositories
 
         public IStudentSubjectRepository StudentSubjects { get; }
 
+        public IStudentRepository Students {get; }
+
+        public ITeacherRepository Teachers { get; }
+
         public int SaveChanges()
         {
             return _context.SaveChanges();

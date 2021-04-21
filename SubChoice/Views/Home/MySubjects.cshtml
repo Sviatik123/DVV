@@ -1,7 +1,8 @@
-﻿@{
-    ViewData["Title"] = "My Subjects";
+﻿@using SubChoice.Core.Data.Entities
+@{
+    ViewData["Title"] = "Subjects";
 }
-<h1>@ViewData["Title"]</h1>
+<div class="d-flex justify-content-between my-4"><h1 class="p-0">@ViewData["Title"]</h1> <a asp-controller="Home" asp-action="Create" class="btn btn-login">New</a></div>
 
 <table class="table">
     <thead>
@@ -13,11 +14,18 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Math</td>
-            <td>Otto</td>
-            <td>12/50</td>
-        </tr>
+        @{
+            var data = (List<Subject>)ViewData["Subjects"];
+        }
+        @foreach (var subject in @data)
+        {
+            <tr>
+                <th scope="row">@subject.Id</th>
+                <td>@subject.Name</td>
+                <td>@subject.Teacher.User.DisplayName</td>
+                <td>@subject.StudentSubjects.Count/@subject.StudentsLimit</td>
+            </tr>
+        }
     </tbody>
 </table>
+
