@@ -18,10 +18,16 @@ namespace SubChoice.Services
 
         public AuthService(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IRepoWrapper repository)
         {
+
+            this._userManager = userManager;
+            this._signInManager = signInManager;
+            this._mapper = mapper;
+
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
             _repository = repository;
+
         }
 
         public async Task<SignInResult> SignInAsync(LoginDto loginDto)
@@ -61,5 +67,6 @@ namespace SubChoice.Services
             teacher.User = user; 
             return  _repository.Teachers.Create(teacher);
         }
+
     }
 }
