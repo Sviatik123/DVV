@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using SubChoice.Core.Data.Entities;
-using System.Collections.Generic;
 
 namespace SubChoice.Controllers
 {
