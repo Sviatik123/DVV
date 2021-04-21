@@ -34,9 +34,6 @@ namespace SubChoice.DataAccess.Repositories
             if (entity?.InactiveAt != null)
                 entity = null;
 
-            //if (entity == null && throwNotFound)
-            //    EntityNotFoundException.ThrowMe(typeof(TEntity).Name, nameof(IIdentifiable<TEntityIdType>.Id), id.ToString());
-
             return entity;
         }
 
@@ -66,9 +63,6 @@ namespace SubChoice.DataAccess.Repositories
         public TEntity Delete(TEntityIdType id, bool throwNotFound = ThrowNotFoundException)
         {
             var entity = _table.Find(id);
-
-            //if (entity == null && throwNotFound)
-            //    EntityNotFoundException.ThrowMe(nameof(TEntity), nameof(IIdentifiable<TEntityIdType>.Id), id.ToString());
 
             _table.Remove(entity);
 
