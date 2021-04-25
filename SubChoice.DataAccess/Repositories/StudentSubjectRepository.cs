@@ -19,7 +19,9 @@ namespace SubChoice.DataAccess.Repositories
         }
 
         protected IQueryable<StudentSubject> Table => _table.AsNoTracking().AsQueryable();
+
         protected IQueryable<StudentSubject> TableTracking => _table.AsQueryable();
+
         protected IUnitOfWork UnitOfWork { get; }
 
         public IQueryable<StudentSubject> SelectAll(bool isTrackable = false)
@@ -45,7 +47,6 @@ namespace SubChoice.DataAccess.Repositories
             UnitOfWork.Entry(data).State = EntityState.Modified;
             return entity.Entity;
         }
-
 
         public StudentSubject Delete(Guid studentId, int subjectId)
         {

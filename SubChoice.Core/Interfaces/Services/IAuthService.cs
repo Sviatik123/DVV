@@ -11,8 +11,11 @@ namespace SubChoice.Core.Interfaces.Services
     public interface IAuthService
     {
         Task<SignInResult> SignInAsync(LoginDto loginDto);
+
         Task SignOutAsync();
+
         Task<IdentityResult> CreateUserAsync(RegisterDto registerDto);
+
         Task<IdentityResult> AddRoleAsync(RegisterDto registerDto);
 
         Task<User> GetUserByEmail(string email);

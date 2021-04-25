@@ -7,9 +7,9 @@ namespace SubChoice.DataAccess.Repositories
 {
     public class UserRepository : GenericRepository<User, Guid>, IUserRepository
     {
-        public UserRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public UserRepository(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
         }
-
     }
 }

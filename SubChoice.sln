@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubChoice.Core", "SubChoice
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubChoice.DataAccess", "SubChoice.DataAccess\SubChoice.DataAccess.csproj", "{72683C35-DE08-41AE-93BF-B4B8F97A9A1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubChoice.Services", "SubChoice.Services\SubChoice.Services.csproj", "{98D539D5-1A45-4D2E-BF4E-2336DD450F90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubChoice.Services", "SubChoice.Services\SubChoice.Services.csproj", "{98D539D5-1A45-4D2E-BF4E-2336DD450F90}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4F0243E2-9EFF-4BFB-946A-59BE07939900}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -7,7 +7,9 @@ namespace SubChoice.Core.Interfaces.Services
     public interface ILoggerService
     {
         void LogInfo(string msg);
+
         void LogError(string msg);
+
         void LogFatal(string msg);
     }
 }

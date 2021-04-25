@@ -9,7 +9,9 @@ namespace SubChoice.Services
 {
     public class LoggerService : ILoggerService
     {
-        public LoggerService() { }
+        public LoggerService()
+        {
+        }
 
         public void LogInfo(string msg)
         {

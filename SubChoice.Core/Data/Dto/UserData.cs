@@ -8,6 +8,7 @@ namespace SubChoice.Core.Data.Dto
     public class UserData : BaseEntity
     {
         public string FirstName { get; set; }
+
         public string LastName { get; set; }
     }
 }

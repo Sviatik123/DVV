@@ -7,7 +7,6 @@ namespace SubChoice.Core.Data.Dto
 {
     public class LoginDto
     {
-
         [Required]
         [EmailAddress]
         public string Email { get; set; }
@@ -18,6 +17,5 @@ namespace SubChoice.Core.Data.Dto
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
-
     }
 }

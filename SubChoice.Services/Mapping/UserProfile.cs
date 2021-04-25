@@ -7,7 +7,7 @@ using SubChoice.Core.Data.Entities;
 
 namespace SubChoice.Services.Mapping
 {
-    public class UserProfile: Profile
+    public class UserProfile : Profile
     {
         public UserProfile()
         {

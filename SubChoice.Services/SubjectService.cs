@@ -98,7 +98,7 @@ namespace SubChoice.Services
                 var studentSubject = new StudentSubject
                 {
                     StudentId = studentId,
-                    SubjectId = subjectId
+                    SubjectId = subjectId,
                 };
                 _repository.StudentSubjects.Create(studentSubject);
                 _repository.SaveChanges();
