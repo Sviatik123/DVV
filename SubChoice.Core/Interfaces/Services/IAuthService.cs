@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using SubChoice.Core.Data.Dto;
+using SubChoice.Core.Data.Entities;
 
 namespace SubChoice.Core.Interfaces.Services
 {
@@ -16,5 +17,7 @@ namespace SubChoice.Core.Interfaces.Services
         Task<IdentityResult> CreateUserAsync(RegisterDto registerDto);
 
         Task<IdentityResult> AddRoleAsync(RegisterDto registerDto);
+
+        Task<User> GetUserByEmail(string email);
     }
 }

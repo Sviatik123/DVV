@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using SubChoice.Core.Data.Entities;
-using SubChoice.Core.Interfaces.DataAccess.Base;
 
 namespace SubChoice.Core.Interfaces.DataAccess
 {

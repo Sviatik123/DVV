@@ -14,7 +14,7 @@ namespace SubChoice.Core.Data.Dto
 
         [Required]
         [Display(Name = "Role")]
-        public string Role { get; set; }
+        public string Role { get; set; } 
 
         [Required]
         [EmailAddress]
