@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using SubChoice.Core.Interfaces.Services;
-using Microsoft.AspNetCore.Identity;
-using SubChoice.Models;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SubChoice.Core.Data.Entities;
+using SubChoice.Core.Interfaces.Services;
+using SubChoice.Models;
 
 namespace SubChoice.Controllers
 {
