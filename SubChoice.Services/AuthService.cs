@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using SubChoice.Core.Configuration;
 using SubChoice.Core.Data.Dto;
 using SubChoice.Core.Data.Entities;
 using SubChoice.Core.Interfaces.DataAccess;
@@ -27,6 +29,12 @@ namespace SubChoice.Services
         public async Task<SignInResult> SignInAsync(LoginDto loginDto)
         {
             var user = await this._userManager.FindByEmailAsync(loginDto.Email);
+
+            if (user.IsApproved == false)
+            {
+                throw new Exception("Acoount is not approved");
+            }
+
             var result = await this._signInManager.PasswordSignInAsync(user, loginDto.Password, loginDto.RememberMe, true);
             return result;
         }
@@ -40,7 +48,34 @@ namespace SubChoice.Services
         {
             var user = this._mapper.Map<RegisterDto, User>(registerDto);
             user.UserName = registerDto.Email;
+
+            if (registerDto.Role == Roles.Teacher)
+            {
+                user.IsApproved = false;
+            }
+
             var result = await this._userManager.CreateAsync(user, registerDto.Password);
+            if (result.Succeeded)
+            {
+                var createdUser = await _userManager.FindByEmailAsync(registerDto.Email);
+                var userId = createdUser.Id;
+                Guid guid = Guid.NewGuid();
+
+                if (registerDto.Role == Roles.Student)
+                {
+                    Student student = new Student() { User = createdUser, Id = guid, UserId = userId, StudentSubjects = new List<StudentSubject>() };
+                    _repository.Students.Create(student);
+                    _repository.SaveChanges();
+
+                }
+                else if (registerDto.Role == Roles.Teacher)
+                {
+                    Teacher teacher = new Teacher() { User = createdUser, Id = guid, UserId = userId, Subjects = new List<Subject>() };
+                    _repository.Teachers.Create(teacher);
+                    _repository.SaveChanges();
+                }
+            }
+
             return result;
         }
 

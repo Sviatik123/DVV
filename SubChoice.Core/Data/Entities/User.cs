@@ -37,6 +37,8 @@ namespace SubChoice.Core.Data.Entities
 
         public DateTime CreatedOn { get; set; }
 
+        public bool IsApproved { get; set; } = true;
+
         public Teacher Teacher { get; set; }
 
         public Student Student { get; set; }

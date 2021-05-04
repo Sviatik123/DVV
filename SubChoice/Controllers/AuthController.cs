@@ -44,14 +44,24 @@ namespace SubChoice.Controllers
                     var resultOfAddToRole = await _authService.AddRoleAsync(model);
                     if (resultOfAddToRole.Succeeded)
                     {
-                        var resultOfSignIn = await _authService.SignInAsync(new LoginDto()
-                        { Email = model.Email, Password = model.Password, RememberMe = false });
-                        if (resultOfSignIn.Succeeded)
+                        try
                         {
-                            _loggerService.LogInfo($"User {@model.Email} registered");
-                        }
+                            var resultOfSignIn = await _authService.SignInAsync(new LoginDto()
+                            { Email = model.Email, Password = model.Password, RememberMe = false });
+                            if (resultOfSignIn.Succeeded)
+                            {
+                                _loggerService.LogInfo($"User {@model.Email} registered");
+                            }
 
-                        return RedirectToAction("Index", "Home");
+                            return RedirectToAction("Index", "Home");
+                        }
+                        catch
+                        {
+                            _loggerService.LogError($"User {@model.Email} registered but not approved");
+                            ViewBag.ErrorTitle = $"{model.Email} is not approved";
+                            ViewBag.ErrorMessage = $"You want to log in as a teacher. We need to check your email. Please, wait for an admin to approve it.";
+                            return View("Error");
+                        }
                     }
                 }
 
@@ -74,18 +84,29 @@ namespace SubChoice.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginDto model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var result = await _authService.SignInAsync(model);
-                if (result.Succeeded)
+                if (ModelState.IsValid)
                 {
-                    _loggerService.LogInfo($"User {@model.Email} logged in");
-                    return RedirectToAction("Index", "Home");
-                }
+                    var result = await _authService.SignInAsync(model);
+                    if (result.Succeeded)
+                    {
+                        _loggerService.LogInfo($"User {@model.Email} logged in");
+                        return RedirectToAction("Index", "Home");
+                    }
 
-                ModelState.AddModelError(string.Empty, "Invalid login or password");
-                _loggerService.LogError($"Invalid login or password");
+                    ModelState.AddModelError(string.Empty, "Invalid login or password");
+                    _loggerService.LogError($"Invalid login or password");
+                }
             }
+            catch
+            {
+                _loggerService.LogError($"Account {model.Email} is not approved");
+                ViewBag.ErrorTitle = $"{model.Email} is not approved";
+                ViewBag.ErrorMessage = $"You want to log in as a teacher. We need to check your email. Please, wait for an admin to approve it.";
+                return View("Error");
+            }
+            
 
             return View(model);
         }

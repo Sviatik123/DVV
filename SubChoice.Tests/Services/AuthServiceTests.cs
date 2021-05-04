@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using SubChoice.Core.Data.Dto;
 using SubChoice.Core.Data.Entities;
+using SubChoice.Core.Interfaces.DataAccess;
 using SubChoice.Core.Interfaces.Services;
 using SubChoice.Services;
 using Xunit;
@@ -24,7 +25,9 @@ namespace SubChoice.Tests.Services
         IAuthService authService;
         Mock<UserManager<User>> userManager;
         Mock<SignInManager<User>> signInManager;
+        Mock<IRepoWrapper> repo;
         Mock<IMapper> mapper;
+
 
         public AuthServiceTests()
         {
@@ -43,7 +46,8 @@ namespace SubChoice.Tests.Services
                 contextAccessor.Object, userPrincipalFactory.Object, null, null, null, null);
 
             this.mapper = new Mock<IMapper>();
-            this.authService = new AuthService(userManager.Object, signInManager.Object, mapper.Object);
+            this.repo = new Mock<IRepoWrapper>();
+            this.authService = new AuthService(userManager.Object, signInManager.Object, mapper.Object, repo.Object);
         }
 
         [Fact]

@@ -8,6 +8,8 @@ namespace SubChoice.Core.Data.Entities
     {
         public virtual User User { get; set; }
 
+        public Guid UserId { get; set; }
+
         public virtual ICollection<Subject> Subjects { get; set; }
     }
 }

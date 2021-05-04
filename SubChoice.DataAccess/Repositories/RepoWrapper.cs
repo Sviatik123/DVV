@@ -12,6 +12,8 @@ namespace SubChoice.DataAccess.Repositories
             _context = context;
             Users = new UserRepository(_context);
             Subjects = new SubjectRepository(_context);
+            Students = new StudentRepository(_context);
+            Teachers = new TeacherRepository(_context);
             StudentSubjects = new StudentSubjectRepository(_context);
         }
 
