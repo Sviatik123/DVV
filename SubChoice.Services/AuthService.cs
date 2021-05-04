@@ -32,7 +32,7 @@ namespace SubChoice.Services
 
             if (user.IsApproved == false)
             {
-                throw new Exception("Acoount is not approved");
+                throw new Exception("Account is not approved");
             }
 
             var result = await this._signInManager.PasswordSignInAsync(user, loginDto.Password, loginDto.RememberMe, true);

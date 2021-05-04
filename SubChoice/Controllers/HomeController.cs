@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -9,6 +10,7 @@ using SubChoice.Models;
 
 namespace SubChoice.Controllers
 {
+    [Authorize(Roles = "Admin, Student, Teacher")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -30,7 +32,7 @@ namespace SubChoice.Controllers
             return View("Subjects");
         }
 
-        public IActionResult MySubjects()
+        public IActionResult ChosenSubjects()
         {
             var user = _userManager.GetUserAsync(User).Result;
             List<Subject> subjects = new List<Subject>();
