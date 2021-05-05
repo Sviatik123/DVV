@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore.Query;
 using SubChoice.Core.Data.Entities;
 
 namespace SubChoice.Core.Interfaces.DataAccess.Base
@@ -16,6 +19,10 @@ namespace SubChoice.Core.Interfaces.DataAccess.Base
         TEntity Update(TEntity data);
 
         TEntity Replace(TEntity oldData, TEntity data);
+
+        IQueryable<TEntity> GetAll(Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,
+            Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null);
 
         TEntity Delete(TEntityIdType id, bool throwNotFound = true);
 

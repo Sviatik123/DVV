@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using SubChoice.Core.Data.Entities;
 using SubChoice.Core.Interfaces.DataAccess.Base;
 
@@ -11,6 +14,8 @@ namespace SubChoice.DataAccess.Repositories
     {
         protected const bool ThrowNotFoundException = false;
         private readonly DbSet<TEntity> _table;
+        protected DatabaseContext dbContext { get; set; }
+
 
         public GenericRepository(IUnitOfWork unitOfWork)
         {
@@ -27,6 +32,26 @@ namespace SubChoice.DataAccess.Repositories
         public IQueryable<TEntity> SelectAll(bool isTrackable = false)
         {
             return isTrackable ? TableTracking : Table;
+        }
+
+        public IQueryable<TEntity> GetAll(Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,
+            Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null)
+        {
+            var query = dbContext.Set<TEntity>().AsNoTracking();
+            if (include != null)
+            {
+                query = include(query);
+            }
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+            return query;
         }
 
         public TEntity SelectById(TEntityIdType id, bool throwNotFound = ThrowNotFoundException)
