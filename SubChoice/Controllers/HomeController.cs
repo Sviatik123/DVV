@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -15,10 +16,10 @@ namespace SubChoice.Controllers
     [Authorize(Roles = "Admin, Student, Teacher")]
     public class HomeController : Controller
     {
-        private readonly ILoggerService _loggerService;
         private ISubjectService _subjectService;
         private IAuthService _authService;
         UserManager<User> _userManager;
+        private ILoggerService _loggerService;
 
         public HomeController(ILoggerService loggerService, ISubjectService subjectService, IAuthService authService, UserManager<User> userManager)
         {
@@ -42,16 +43,48 @@ namespace SubChoice.Controllers
             {
                subjects = _subjectService.SelectAllByTeacherId(user.Id).Result;
             }
-            else if (user.Student != null ){
+            else if (user.Student != null ) {
                 subjects = _subjectService.SelectAllByStudentId(user.Id).Result;
             }
-            ViewData["Subjects"] = subjects;
+            ViewData["ChosenSubjects"] = subjects;
             return View();
         }
 
-        public IActionResult Create() {
-            // TODO: Popagate techer to view 
+        [Authorize(Roles = "Admin, Teacher")]
+        public IActionResult MySubjects()
+        {
+            var teacherId = _userManager.GetUserAsync(User).Result.Id;
+            ViewData["MySubjects"] = _subjectService.SelectAllByTeacherId(teacherId).Result;
+            return View("MySubjects");
+        }
+
+        [Authorize(Roles = "Admin, Teacher")]
+
+        public IActionResult Create()
+        {
+            ViewData["TeacherId"] = _userManager.GetUserAsync(User).Result.Id;
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(SubjectData model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var createdSubject = await _subjectService.CreateSubject(model);
+                if (createdSubject == null)
+                {
+                    _loggerService.LogError($"Invalid login or password");
+                    ModelState.AddModelError(string.Empty, "Invalid login or password");
+                }
+                _loggerService.LogInfo($"Invalid login or password");
+            }
+
+            //SelectList rolesList = new SelectList(roles);
+            //ViewBag.Roles = rolesList;
+            return View("MySubjects");
         }
 
         public IActionResult SubjectDetail(int id)
@@ -60,7 +93,6 @@ namespace SubChoice.Controllers
             ViewData["Subject"] = subject;
             return View();
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
