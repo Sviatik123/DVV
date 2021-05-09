@@ -94,7 +94,7 @@ namespace SubChoice.Services
         {
             Teacher teacher = new Teacher();
             teacher.User = user; 
-            return  _repository.Teachers.Create(teacher);
+            return _repository.Teachers.Create(teacher);
         }
     }
 }

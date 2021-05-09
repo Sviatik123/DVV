@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SubChoice.Core.Data.Dto;
 using SubChoice.Core.Data.Entities;
 using SubChoice.Core.Extensions;
@@ -114,6 +115,27 @@ namespace SubChoice.Services
                 var studentSubject = _repository.StudentSubjects.Delete(studentId, subjectId);
                 _repository.SaveChanges();
                 return studentSubject;
+            });
+        }
+
+        public async Task<List<User>> SelectNotApprovedTeachers()
+        {
+            return await ExecuteAsync(() =>
+            {
+                var teachers = _repository.Users.SelectAll().Where(t => t.IsApproved == false && t.Teacher != null);
+                return teachers.ToList();
+            });
+        }
+
+        public async Task<User> ApproveUser(Guid id)
+        {
+            return await ExecuteAsync(() =>
+            {
+                var user = _repository.Users.SelectById(id);
+                ApproveUserDto data = new ApproveUserDto();
+                user.MapChanges(data);
+                _repository.SaveChanges();
+                return user;
             });
         }
     }
