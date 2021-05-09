@@ -28,8 +28,7 @@ namespace SubChoice.Services
         {
             return await ExecuteAsync(() =>
             {
-                //var subjects = _repository.Subjects.GetAll(include: x=>x.); це макс пробував мені помогти, не стирай
-                var subjects = _repository.Subjects.SelectAll();
+                var subjects = _repository.Subjects.SelectAll().Include(x => x.Teacher.User).Include(x => x.StudentSubjects);
                 return subjects.ToList();
             });
         }

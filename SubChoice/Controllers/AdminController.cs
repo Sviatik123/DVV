@@ -1,24 +1,19 @@
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using SubChoice.Core.Configuration;
 using SubChoice.Core.Data.Dto;
-using SubChoice.Core.Data.Entities;
 using SubChoice.Core.Interfaces.Services;
-using SubChoice.Services;
 
 namespace SubChoice.Controllers
 {
-    [AllowAnonymous]
-    public class AdminCotroller : Controller
+    public class AdminController : Controller
     {
         private ISubjectService _subjectService;
+        private ILoggerService _loggerService;
 
-        public AdminCotroller(ISubjectService subjectService)
+        public AdminController(ISubjectService subjectService, ILoggerService loggerService)
         {
             _subjectService = subjectService;
+            _loggerService = loggerService;
         }
 
         [HttpGet]
@@ -26,14 +21,25 @@ namespace SubChoice.Controllers
         {
             var teachers = _subjectService.SelectNotApprovedTeachers().Result;
             ViewData["Teachers"] = teachers;
-            return View("Admin");
+            return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ApproveTeacher(RegisterDto model)
+        public async Task<IActionResult> ApproveTeacher(IdDto model)
         {
-            return null;
+            if (!ModelState.IsValid)
+            {
+                _loggerService.LogError($"Error happened. Try again");
+                return View("Index");
+            }
+            ApproveUserDto data = new ApproveUserDto();
+            var approvedTeacher = await _subjectService.ApproveUser(model.Id);
+            if (approvedTeacher == null)
+            {
+                _loggerService.LogError($"Not valid user id. Try again");
+                ModelState.AddModelError(string.Empty, "Invalid login or password");
+            }
+            return View("Index");
         }
     }
 }

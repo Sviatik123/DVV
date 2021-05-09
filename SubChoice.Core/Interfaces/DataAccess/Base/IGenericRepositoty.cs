@@ -20,10 +20,6 @@ namespace SubChoice.Core.Interfaces.DataAccess.Base
 
         TEntity Replace(TEntity oldData, TEntity data);
 
-        IQueryable<TEntity> GetAll(Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,
-            Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null);
-
         TEntity Delete(TEntityIdType id, bool throwNotFound = true);
 
         IQueryable<TEntity> SelectAllByIds(IEnumerable<TEntityIdType> ids, bool isTrackable = false);

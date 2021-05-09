@@ -99,30 +99,5 @@ namespace SubChoice.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-        [HttpGet]
-        public IActionResult Admin()
-        {
-            var teachers = _subjectService.SelectNotApprovedTeachers().Result;
-            ViewData["Teachers"] = teachers;
-            return View("Admin");
-        }
-
-        public async Task<IActionResult> Admin(IdDto model)
-        {
-            if (!ModelState.IsValid)
-            {
-                _loggerService.LogError($"Error happened. Try again");
-                return View();
-            }
-            ApproveUserDto data = new ApproveUserDto();
-            var approvedTeacher = _subjectService.ApproveUser(model.Id);
-            if (approvedTeacher == null)
-            {
-                _loggerService.LogError($"Not valid user id. Try again");
-                ModelState.AddModelError(string.Empty, "Invalid login or password");
-            }
-            return View();
-        }
     }
 }

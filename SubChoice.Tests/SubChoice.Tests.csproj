@@ -24,4 +24,8 @@
     <ProjectReference Include="..\SubChoice\SubChoice.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\AdminCotroller\" />
+  </ItemGroup>
+
 </Project>
