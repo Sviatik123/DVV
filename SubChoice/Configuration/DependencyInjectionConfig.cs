@@ -29,7 +29,8 @@ namespace SubChoice.Configuration
             services.AddScoped<ISubjectService, SubjectService>();
 
             // Repositories
-            services.AddScoped<IRepoWrapper, RepoWrapper>();
+            services.AddTransient<IRepoWrapper, RepoWrapper>();
+            services.AddTransient<IUserRepository, UserRepository>();
         }
     }
 }

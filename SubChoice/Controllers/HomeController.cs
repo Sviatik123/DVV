@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SubChoice.Core.Data.Dto;
 using SubChoice.Core.Data.Entities;
 using SubChoice.Core.Interfaces.Services;
 using SubChoice.Models;
@@ -13,14 +15,14 @@ namespace SubChoice.Controllers
     [Authorize(Roles = "Admin, Student, Teacher")]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILoggerService _loggerService;
         private ISubjectService _subjectService;
         private IAuthService _authService;
         UserManager<User> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, ISubjectService subjectService, IAuthService authService, UserManager<User> userManager)
+        public HomeController(ILoggerService loggerService, ISubjectService subjectService, IAuthService authService, UserManager<User> userManager)
         {
-            _logger = logger;
+            _loggerService = loggerService;
             _subjectService = subjectService;
             _authService = authService;
             _userManager = userManager;
@@ -64,6 +66,31 @@ namespace SubChoice.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public IActionResult Admin()
+        {
+            var teachers = _subjectService.SelectNotApprovedTeachers().Result;
+            ViewData["Teachers"] = teachers;
+            return View("Admin");
+        }
+
+        public async Task<IActionResult> Admin(IdDto model)
+        {
+            if (!ModelState.IsValid)
+            {
+                _loggerService.LogError($"Error happened. Try again");
+                return View();
+            }
+            ApproveUserDto data = new ApproveUserDto();
+            var approvedTeacher = _subjectService.ApproveUser(model.Id);
+            if (approvedTeacher == null)
+            {
+                _loggerService.LogError($"Not valid user id. Try again");
+                ModelState.AddModelError(string.Empty, "Invalid login or password");
+            }
+            return View();
         }
     }
 }
