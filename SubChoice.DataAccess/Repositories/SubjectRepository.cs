@@ -25,7 +25,7 @@ namespace SubChoice.DataAccess.Repositories
         public IQueryable<Subject> SelectAllByStudentId(Guid studentId, bool isTrackable = false)
         {
             return SelectAll(isTrackable)
-                .Include(s => s.Teacher)
+                .Include(s => s.Teacher.User)
                 .Include(s => s.StudentSubjects)
                 .ThenInclude(ss => ss.Student)
                 .Where(s => s.StudentSubjects.Select(ss => ss.StudentId).Contains(studentId));

@@ -9,10 +9,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Teacher</th>
             <th scope="col">Participants</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -22,10 +22,16 @@
         @foreach (var subject in @data)
         {
             <tr>
-                <th scope="row">@subject.Id</th>
-                <td>@subject.Name</td>
+                <td onclick="location.href = '@(Url.Action("SubjectDetail", "Home", new { id = @subject.Id }))'">@subject.Name</td>
                 <td>@subject.Teacher.User.DisplayName</td>
                 <td>@subject.StudentSubjects.Count/@subject.StudentsLimit</td>
+               
+                <td>
+                    <form method="post" asp-controller="Home" asp-action="Register">
+                        <input type="hidden" name="Id" value="@subject.Id" />
+                        <button type="submit" class="btn btn-success">Register</button>
+                    </form>
+                <td>
             </tr>
 
         }

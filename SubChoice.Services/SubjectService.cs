@@ -37,8 +37,8 @@ namespace SubChoice.Services
         {
             return await ExecuteAsync(() =>
             {
-                var subject = _repository.Subjects.SelectById(id);
-                return subject;
+                var subject = _repository.Subjects.SelectAll().Where(x => x.Id == id).Include(x => x.Teacher.User).Include(x => x.StudentSubjects);
+                return subject.ToList()[0];
             });
         }
 
@@ -89,6 +89,15 @@ namespace SubChoice.Services
             {
                 var subjects = _repository.Subjects.SelectAllByStudentId(studentId);
                 return subjects.ToList();
+            });
+        }
+
+        public async Task<List<Student>> SelectAllStudentsSubjects(int subjectId)
+        {
+            return await ExecuteAsync(() =>
+            {
+                var students = _repository.Students.SelectAll().Include(s => s.StudentSubjects).Where(s => s.StudentSubjects.Any(x => x.SubjectId == subjectId)).Include(x => x.User);
+                return students.ToList();
             });
         }
 

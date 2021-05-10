@@ -18,6 +18,8 @@ namespace SubChoice.Core.Data.Dto
         [Display(Name = "Description")]
         public string Description { get; set; }
 
+        public int Id { get; set; }
+
         public Guid TeacherId { get; set; }
     }
 }
