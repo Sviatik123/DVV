@@ -24,7 +24,7 @@ namespace SubChoice.Core.Extensions
                     }
                     catch (Exception)
                     {
-                        // ignored,
+                        // ignored
                     }
                 }
             }
