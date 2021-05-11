@@ -92,7 +92,7 @@ namespace SubChoice.Controllers
                     if (result.Succeeded)
                     {
                         _loggerService.LogInfo($"User {@model.Email} logged in");
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Welcome", "Home");
                     }
 
                     ModelState.AddModelError(string.Empty, "Invalid login or password");

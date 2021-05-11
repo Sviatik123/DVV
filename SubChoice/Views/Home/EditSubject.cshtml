@@ -1,34 +1,37 @@
-@model SubChoice.Core.Data.Dto.SubjectData
+﻿@model SubChoice.Core.Data.Dto.SubjectData
+@using SubChoice.Core.Data.Entities
 
 @{
-    ViewData["Title"] = "Create subject";
-}
+    ViewData["Title"] = "Edit subject";
+    var subject = (Subject)ViewData["Subject"];
 
+}
 <div class="container">
     <h1 class="text-center">@ViewData["Title"]</h1>
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <form asp-controller="Home" asp-action="Create" method="post">
+            <form asp-controller="Home" asp-action="EditSubject" method="post">
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Name"></label>
-                    <input asp-for="Name" class="form-control" />
+                    <input asp-for="Name" class="form-control" value="@subject.Name">
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="StudentsLimit">Capacity</label>
-                    <input asp-for="StudentsLimit" class="form-control" />
+                    <input asp-for="StudentsLimit" class="form-control" value="@subject.StudentsLimit" />
                     <span asp-validation-for="StudentsLimit" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Description"></label>
-                    <textarea asp-for="Description" class="form-control"></textarea>
+                    <textarea class="form-control" data-val="true" data-val-required="The Description field is required." id="Description" name="Description" spellcheck="false">@subject.Description</textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-group d-flex justify-content-between pt-3">
                     <input type="hidden" asp-for="TeacherId" value=@ViewData["TeacherId"] />
+                    <input type="hidden" asp-for="Id" value=@ViewData["Id"] />
                     <button type="submit" class="btn btn-login" onclick="history.go(-1); return false;">Back</button>
-                    <button type="submit" class="btn btn-login">Create</button>
+                    <button type="submit" class="btn btn-login">Edit</button>
                 </div>
 
             </form>

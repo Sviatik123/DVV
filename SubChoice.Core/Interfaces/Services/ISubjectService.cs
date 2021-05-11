@@ -20,6 +20,8 @@ namespace SubChoice.Core.Interfaces.Services
 
         Task<List<Subject>> SelectAllSubjects();
 
+        Task<List<Student>> SelectAllStudentsSubjects(int subjectId);
+
         Task<StudentSubject> RegisterStudent(Guid studentId, int subjectId);
 
         Task<StudentSubject> UnRegisterStudent(Guid studentId, int subjectId);
@@ -29,5 +31,6 @@ namespace SubChoice.Core.Interfaces.Services
         Task<List<User>> SelectNotApprovedTeachers();
 
         Task<User> ApproveUser(Guid id);
+
     }
 }
