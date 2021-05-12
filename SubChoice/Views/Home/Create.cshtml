@@ -28,7 +28,7 @@
                         </div>
                         <div class="form-group d-flex justify-content-between pt-3">
                             <input type="hidden" asp-for="TeacherId" value=@ViewData["TeacherId"] />
-                            <button type="submit" class="btn btn-login" onclick="history.go(-1); return false;">Back</button>
+                            <button type="submit" class="btn btn-login" onclick="location.href = '@(Url.Action("MySubjects", "Home"))'">Back</button>
                             <button type="submit" class="btn btn-login">Create</button>
                         </div>
 

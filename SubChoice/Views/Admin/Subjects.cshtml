@@ -24,7 +24,7 @@
             <tr>
                 <td onclick="location.href = '@(Url.Action("SubjectDetail", "Home", new { id = @subject.Id }))'">@subject.Name</td>
                 <td>@subject.Teacher.User.DisplayName</td>
-                <td>@subject.StudentSubjects.Count/@subject.StudentsLimit</td>
+                <td onclick="location.href = '@(Url.Action("StudentsSubject", "Home", new { id = @subject.Id }))'">@subject.StudentSubjects.Count/@subject.StudentsLimit</td>
 
             </tr>
 
