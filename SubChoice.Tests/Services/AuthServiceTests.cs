@@ -85,31 +85,6 @@ namespace SubChoice.Tests.Services
         }
 
         [Fact]
-        public async Task CreateUser_TestAsync()
-        {
-            // Arrange
-            mapper.Setup(x => x.Map<RegisterDto, User>(It.IsAny<RegisterDto>())).Returns(new User());
-            userManager.Setup(x => x.CreateAsync(It.IsAny<User>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
-
-            // Act
-            var result = await authService.CreateUserAsync(new RegisterDto()
-            {
-                Email = "maxym@gmail.com",
-                FirstName = "maxym",
-                LastName = "maxym",
-                Password = "maxym123",
-                ConfirmPassword = "maxym123",
-            });
-
-            // Assert
-            mapper.Verify();
-            userManager.Verify();
-            Assert.NotNull(result);
-            Assert.IsType<IdentityResult>(result);
-            Assert.True(result.Succeeded);
-        }
-
-        [Fact]
         public async Task AddRole_TestAsync()
         {
             // Arrange
@@ -125,5 +100,31 @@ namespace SubChoice.Tests.Services
             Assert.IsType<IdentityResult>(result);
             Assert.True(result.Succeeded);
         }
+
+
+        //[Fact]
+        //public async Task CreateUser_TestAsync()
+        //{
+        //    // Arrange
+        //    mapper.Setup(x => x.Map<RegisterDto, User>(It.IsAny<RegisterDto>())).Returns(new User());
+        //    userManager.Setup(x => x.CreateAsync(It.IsAny<User>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
+
+        //    // Act
+        //    var result = await authService.CreateUserAsync(new RegisterDto()
+        //    {
+        //        Email = "maxym@gmail.com",
+        //        FirstName = "maxym",
+        //        LastName = "maxym",
+        //        Password = "maxym123",
+        //        ConfirmPassword = "maxym123",
+        //    });
+
+        //    // Assert
+        //    mapper.Verify();
+        //    userManager.Verify();
+        //    Assert.NotNull(result);
+        //    Assert.IsType<IdentityResult>(result);
+        //    Assert.True(result.Succeeded);
+        //}
     }
 }
