@@ -20,14 +20,14 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         @if (User.IsInRole("Student"))
-                         {
+                        {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Subjects list</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ChosenSubjects">Chosen subjects</a>
                             </li>
-                         }
+                        }
 
                         else if (User.IsInRole("Teacher"))
                         {
@@ -37,7 +37,7 @@
                         }
 
 
-                        </ul>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -45,15 +45,17 @@
 
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    @RenderBody()
+    </main>
+        </div>
 
-    <footer class="border-top footer text-muted">
+    @*<footer class="footer text-muted" style="background-color:white;">
         <div class="container">
             &copy; 2021 - SubChoice - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+    </footer>*@
+
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
