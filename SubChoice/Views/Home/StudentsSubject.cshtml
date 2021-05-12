@@ -1,29 +1,31 @@
 ﻿@using SubChoice.Core.Data.Entities
-@{
-    ViewData["Title"] = "Students";
-}
-<div class="d-flex justify-content-between my-4"><h1 class="p-0">@ViewData["Title"]</h1> </div>
+<div class=" Subj">
+    @{
+        ViewData["Title"] = "Students";
+    }
+    <div class="d-flex justify-content-between my-4"><h1 class="p-0" style="margin-left:3%;">@ViewData["Title"]</h1> </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            var data = (List<Student>)ViewData["StudentsSubject"];
-        }
-        @foreach (var student in @data)
-        {
+    <table class="table">
+        <thead>
             <tr>
-                <td>@student.User.DisplayName</td>
+                <th scope="col">Name</th>
             </tr>
-        }
-        
-    </tbody>
+        </thead>
+        <tbody>
+            @{
+                var data = (List<Student>)ViewData["StudentsSubject"];
+            }
+            @foreach (var student in @data)
+            {
+                <tr>
+                    <td>@student.User.DisplayName</td>
+                </tr>
+            }
 
-</table>
-<div class="form-group d-flex justify-content-between pt-3">
-    <button type="submit" class="btn btn-outline-info" onclick="history.go(-1); return false;">Back</button>
+        </tbody>
+
+    </table>
+    <div class="form-group d-flex justify-content-between pt-3">
+        <button type="submit" class="btn  btn-login" onclick="history.go(-1); return false;">Back</button>
+    </div>
 </div>
