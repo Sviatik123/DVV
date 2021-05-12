@@ -1,16 +1,55 @@
 ﻿@using SubChoice.Core.Data.Entities;
+<div class=" Subj">
+    @{
+        var subject = (Subject)ViewData["Subject"];
+        ViewData["Title"] = @subject.Name;
+    }
 
-@{
-    var subject = (Subject)ViewData["Subject"];
-}
-<div class="container">
-    <div class="d-flex justify-content-between">
-        <h1 class="text-center">@subject.Name</h1>
-        <p>@subject.StudentSubjects.Count/@subject.StudentsLimit</p>
+    @*<div class="container">
+
+            <div class="d-flex justify-content-between">
+                <h1 class="text-center">@subject.Name</h1>
+                <p>@subject.StudentSubjects.Count/@subject.StudentsLimit</p>
+            </div>
+            <h4>@subject.Teacher.User.DisplayName</h4>
+            <b class="pt-5">Description</b>
+            <p class="pt-5">
+                @subject.Description
+            </p>
+        </div>*@
+    <div class="d-flex justify-content-between my-4"><h1 class="p-0" style="margin-left:3%;"> @ViewData["Title"]</h1> </div>
+
+    <div class=" desc" style="position:center;">
+        <p>Teacher Name: <h4>@subject.Teacher.User.DisplayName</h4></p> 
+        <p>Capacity: <h4>@subject.StudentSubjects.Count/@subject.StudentsLimit</h4></p>
+        <p>Description: <h4>@subject.Description</h4></p>
+
     </div>
-    <h4>@subject.Teacher.User.DisplayName</h4>
-    <b class="pt-5">Description</b>
-    <p class="pt-5">
-        @subject.Description
-    </p>
+    @*<table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Capacity</th>
+                <th scope="col">Description</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @{
+                //var subject = (Subject)ViewData["Subject"];
+                <tr>
+                    <td>@subject.Teacher.User.DisplayName</td>
+                    <td>@subject.StudentSubjects.Count/@subject.StudentsLimit</td>
+                    <td>@subject.Description</td>
+                </tr>
+
+            }
+
+
+        </tbody>
+
+    </table>*@
+    <div class="form-group d-flex justify-content-between pt-3">
+        <button type="submit" class="btn btn-login" onclick="history.go(-1); return false;">Back</button>
+    </div>
 </div>

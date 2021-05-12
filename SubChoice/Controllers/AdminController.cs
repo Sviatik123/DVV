@@ -21,9 +21,9 @@ namespace SubChoice.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var teachers = _subjectService.SelectNotApprovedTeachers().Result;
+            var teachers = await _subjectService.SelectNotApprovedTeachers();
             ViewData["Teachers"] = teachers;
             return View();
         }
@@ -57,6 +57,9 @@ namespace SubChoice.Controllers
                 _loggerService.LogError($"Not valid user id. Try again");
                 ModelState.AddModelError(string.Empty, "Invalid login or password");
             }
+
+            var teachers = await _subjectService.SelectNotApprovedTeachers();
+            ViewData["Teachers"] = teachers;
             return View("Index");
         }
     }

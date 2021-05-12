@@ -66,7 +66,7 @@ namespace SubChoice.Services
 
             if (registerDto.Role == Roles.Teacher)
             {
-                //user.IsApproved = false;
+                user.IsApproved = false;
             }
 
             var result = await this._userManager.CreateAsync(user, registerDto.Password);
