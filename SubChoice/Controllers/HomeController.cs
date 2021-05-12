@@ -13,7 +13,7 @@ using SubChoice.Models;
 
 namespace SubChoice.Controllers
 {
-    [Authorize(Roles = "Admin, Student, Teacher")]
+    [Authorize(Roles = "Administrator, Student, Teacher")]
     public class HomeController : Controller
     {
         private ISubjectService _subjectService;
