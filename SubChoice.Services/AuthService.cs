@@ -10,7 +10,6 @@ using SubChoice.Core.Data.Dto;
 using SubChoice.Core.Data.Entities;
 using SubChoice.Core.Interfaces.DataAccess;
 using SubChoice.Core.Interfaces.Services;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SubChoice.Services
 {
