@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using System.Linq;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Internal;
 using SubChoice.Core.Configuration;
 using SubChoice.Core.Data.Dto;
 using SubChoice.Core.Data.Entities;
@@ -36,6 +38,19 @@ namespace SubChoice.Services
             }
 
             var result = await this._signInManager.PasswordSignInAsync(user, loginDto.Password, loginDto.RememberMe, true);
+            return result;
+        }
+
+        public async Task<List<User>> GetUsers()
+        {
+            List<User> result = new List<User>();
+            var students = await this._userManager.GetUsersInRoleAsync("Student");
+            var admins = await this._userManager.GetUsersInRoleAsync("Administrator");
+            var teachers = await this._userManager.GetUsersInRoleAsync("Teacher");
+
+            result.AddRange(students);
+            result.AddRange(teachers);
+            result.AddRange(admins);
             return result;
         }
 

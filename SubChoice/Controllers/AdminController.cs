@@ -2,18 +2,22 @@
 using System.Threading.Tasks;
 using SubChoice.Core.Data.Dto;
 using SubChoice.Core.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SubChoice.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
         private ISubjectService _subjectService;
         private ILoggerService _loggerService;
+        private IAuthService _authService;
 
-        public AdminController(ISubjectService subjectService, ILoggerService loggerService)
+        public AdminController(ISubjectService subjectService, ILoggerService loggerService, IAuthService authService)
         {
             _subjectService = subjectService;
             _loggerService = loggerService;
+            _authService = authService;
         }
 
         [HttpGet]
@@ -22,6 +26,20 @@ namespace SubChoice.Controllers
             var teachers = await _subjectService.SelectNotApprovedTeachers();
             ViewData["Teachers"] = teachers;
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AllSubjects()
+        {
+            ViewData["Subjects"] = await _subjectService.SelectAllSubjects();
+            return View("Subjects");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Users()
+        {
+            ViewData["Users"] = await _authService.GetUsers();
+            return View("Users");
         }
 
         [HttpPost]

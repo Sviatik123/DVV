@@ -19,5 +19,7 @@ namespace SubChoice.Core.Interfaces.Services
         Task<IdentityResult> AddRoleAsync(RegisterDto registerDto);
 
         Task<User> GetUserByEmail(string email);
+
+        Task<List<User>> GetUsers();
     }
 }
