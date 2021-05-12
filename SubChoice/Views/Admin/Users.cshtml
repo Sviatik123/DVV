@@ -1,33 +1,35 @@
 ﻿@using SubChoice.Core.Data.Entities
-@{
-    ViewData["Title"] = "Users list";
-}
+<div class=" Subj">
+    @{
+        ViewData["Title"] = "Users list";
+    }
 
-<div class="d-flex justify-content-between my-4"><h1 class="p-0">@ViewData["Title"]</h1></div>
+    <div class="d-flex justify-content-between my-4"><h1 class="p-0">@ViewData["Title"]</h1></div>
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Role</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            var data = (List<User>)ViewData["Users"];
-        }
-        @foreach (var user in @data)
-        {
+    <table class="table">
+        <thead>
             <tr>
-                <td>@user.FirstName</td>
-                <td>@user.LastName</td>
-                <td>@user.Email</td>
-
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
             </tr>
+        </thead>
+        <tbody>
+            @{
+                var data = (List<User>)ViewData["Users"];
+            }
+            @foreach (var user in @data)
+            {
+                <tr>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Email</td>
 
-        }
-    </tbody>
-</table>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
