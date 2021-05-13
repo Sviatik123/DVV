@@ -18,18 +18,32 @@
         </thead>
         <tbody>
             @{
-                var data = (List<User>)ViewData["Users"];
+                var data = (Dictionary<string, List<User>>)ViewData["Users"];
             }
-            @foreach (var user in @data)
+            @foreach (KeyValuePair<string, List<User>> key in @data)
             {
-                <tr>
-                    <td>@user.FirstName</td>
-                    <td>@user.LastName</td>
-                    <td>@user.Email</td>
-
-                </tr>
-
+                @foreach (User user in key.Value)
+                {
+                    <tr>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                        <td>@user.Email</td>
+                        @if (key.Key == "students")
+                        {
+                            <td>Student</td>
+                        }
+                        @if (key.Key == "teachers")
+                        {
+                            <td>Teacher</td>
+                        }
+                        @if (key.Key == "admins")
+                        {
+                            <td>Admin</td>
+                        }
+                    </tr>
+                }
             }
+
         </tbody>
-    </table>
+            </table>
 </div>

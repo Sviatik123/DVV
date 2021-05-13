@@ -20,6 +20,6 @@ namespace SubChoice.Core.Interfaces.Services
 
         Task<User> GetUserByEmail(string email);
 
-        Task<List<User>> GetUsers();
+        Task<Dictionary<string, List<User>>> GetUsers();
     }
 }

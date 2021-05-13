@@ -41,16 +41,22 @@ namespace SubChoice.Services
             return result;
         }
 
-        public async Task<List<User>> GetUsers()
+        public async Task<Dictionary<string, List<User>>> GetUsers()
         {
-            List<User> result = new List<User>();
+            Dictionary<string, List<User>> result = new Dictionary<string, List<User>>();
             var students = await this._userManager.GetUsersInRoleAsync("Student");
             var admins = await this._userManager.GetUsersInRoleAsync("Administrator");
             var teachers = await this._userManager.GetUsersInRoleAsync("Teacher");
 
-            result.AddRange(students);
-            result.AddRange(teachers);
-            result.AddRange(admins);
+            List<User> student_list = new List<User>();
+            student_list.AddRange(students);
+            List<User> teacher_list = new List<User>();
+            teacher_list.AddRange(teachers);
+            List<User> admin_list = new List<User>();
+            admin_list.AddRange(admins);
+            result.Add("students", student_list);
+            result.Add("teachers", teacher_list);
+            result.Add("admins", admin_list);
             return result;
         }
 
