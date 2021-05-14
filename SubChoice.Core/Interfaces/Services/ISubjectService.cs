@@ -32,5 +32,7 @@ namespace SubChoice.Core.Interfaces.Services
 
         Task<User> ApproveUser(Guid id);
 
+        Task<bool> CheckIfRecordStudentSubjectExists(int subId, Guid studId);
+
     }
 }
