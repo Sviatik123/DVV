@@ -29,7 +29,7 @@
                     <td>@teacher.DisplayName</td>
                     <td>
                         <form method="post" asp-controller="Admin" asp-action="ApproveTeacher">
-                            <button type="submit" class="btn btn-danger">Approve</button>
+                            <button type="submit" class="btn btn-success">Approve</button>
                             <input type="hidden" name="Id" value=@teacher.Id />
                             <input type="hidden" name="IsApproved" value="true" />
                         </form>

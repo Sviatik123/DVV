@@ -44,7 +44,7 @@ namespace SubChoice.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin, Teacher")]
+        [Authorize(Roles = "Administrator, Teacher")]
         public async Task<IActionResult> MySubjects()
         {
             var teacherId = await _userManager.GetUserAsync(User);
@@ -52,7 +52,7 @@ namespace SubChoice.Controllers
             return View("MySubjects");
         }
 
-        [Authorize(Roles = "Admin, Teacher")]
+        [Authorize(Roles = "Administrator, Teacher")]
 
         public async Task<IActionResult> Create()
         {
