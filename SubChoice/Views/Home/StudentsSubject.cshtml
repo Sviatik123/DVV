@@ -26,6 +26,14 @@
 
     </table>
     <div class="form-group d-flex justify-content-between pt-3">
-        <button type="submit" class="btn  btn-login" onclick="location.href = '@(Url.Action("MySubjects", "Home"))'">Back</button>
+        @if (User.IsInRole("Teacher"))
+        {
+            <button type="submit" class="btn  btn-login" onclick="location.href = '@(Url.Action("MySubjects", "Home"))'">Back</button>
+
+        }
+        else
+        {
+            <button type="submit" class="btn  btn-login" onclick="location.href = '@(Url.Action("AllSubjects", "Admin"))'">Back</button>
+        }
     </div>
 </div>

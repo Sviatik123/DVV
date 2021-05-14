@@ -146,5 +146,14 @@ namespace SubChoice.Services
                 return user;
             });
         }
+
+        public async Task<bool> CheckIfRecordStudentSubjectExists(int subId, Guid studId)
+        {
+            return await ExecuteAsync(() =>
+            {
+                var res = _repository.StudentSubjects.SelectAll().Any(x => x.StudentId == studId && x.SubjectId == subId);
+                return res;
+            });
+        }
     }
 }

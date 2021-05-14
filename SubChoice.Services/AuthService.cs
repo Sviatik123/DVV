@@ -32,9 +32,12 @@ namespace SubChoice.Services
         {
             var user = await this._userManager.FindByEmailAsync(loginDto.Email);
 
-            if (user.IsApproved == false)
+            if (user != null)
             {
-                throw new Exception("Account is not approved");
+                if (user.IsApproved == false)
+                {
+                    throw new Exception("Account is not approved");
+                }
             }
 
             var result = await this._signInManager.PasswordSignInAsync(user, loginDto.Password, loginDto.RememberMe, true);

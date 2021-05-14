@@ -1,4 +1,10 @@
 ﻿@using SubChoice.Core.Data.Entities
+@using SubChoice.Services
+@using Microsoft.AspNetCore.Identity;
+
+@inject SubjectService subjectService
+@inject UserManager<User> _userManager
+
 <div class=" Subj">
     @{
         ViewData["Title"] = "Subjects list";
@@ -15,7 +21,7 @@
                 <th scope="col">Participants</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
-                
+
             </tr>
         </thead>
         <tbody>
@@ -30,10 +36,13 @@
                     <td>@subject.StudentSubjects.Count/@subject.StudentsLimit</td>
 
                     <td>
-                        <form method="post" asp-controller="Home" asp-action="Register">
-                            <input type="hidden" name="Id" value="@subject.Id" />
-                            <button type="submit" class="btn btn-success">Register</button>
-                        </form>
+                        @if (!@subjectService.CheckIfRecordStudentSubjectExists(@subject.Id, @_userManager.GetUserAsync(User).Result.Id).Result)
+                         {
+                            <form method="post" asp-controller="Home" asp-action="Register">
+                                <input type="hidden" name="Id" value="@subject.Id" />
+                                <button type="submit" class="btn btn-success">Register</button>
+                            </form>
+                         }
                     <td>
                 </tr>
 

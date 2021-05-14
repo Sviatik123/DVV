@@ -93,5 +93,25 @@ namespace SubChoice.Controllers
             ViewData["MySubjects"] = _subjectService.SelectAllByTeacherId(teacherId).Result;
             return View("MySubjects");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteSubject(SubjectIdDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                var deleteSubject = await _subjectService.DeleteSubject(model.Id);
+
+                if (deleteSubject == null)
+                {
+                    _loggerService.LogError($"Fail to delete subject {model.Id}");
+                    ModelState.AddModelError(string.Empty, "Fail to delete subject");
+                }
+                _loggerService.LogInfo($"Successfully delete subject {model.Id}");
+            }
+
+            ViewData["Subjects"] = await _subjectService.SelectAllSubjects();
+            return View("Subjects");
+        }
     }
 }
