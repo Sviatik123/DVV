@@ -18,6 +18,8 @@ namespace SubChoice.Configuration
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ISubjectService, SubjectService>();
 
+            services.AddTransient<SubjectService>();
+
             // Repositories
             services.AddScoped<IRepoWrapper, RepoWrapper>();
         }
