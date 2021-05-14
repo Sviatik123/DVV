@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -99,14 +100,18 @@ namespace SubChoice.Controllers
                     _loggerService.LogError($"Invalid login or password");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                _loggerService.LogError($"Account {model.Email} is not approved");
-                ViewBag.ErrorTitle = $"{model.Email} is not approved";
-                ViewBag.ErrorMessage = $"You want to log in as a teacher. We need to check your email. Please, wait for an admin to approve it.";
-                return View("Error");
+                if (ex.Message == "Account is not approved")
+                {
+                    _loggerService.LogError($"Account {model.Email} is not approved");
+                    ViewBag.ErrorTitle = $"{model.Email} is not approved";
+                    ViewBag.ErrorMessage = $"You want to log in as a teacher. We need to check your email. Please, wait for an admin to approve it.";
+                    return View("Error");
+                }
+                ModelState.AddModelError(string.Empty, "Invalid login or password");
+                _loggerService.LogError($"Invalid login or password");
             }
-            
 
             return View(model);
         }
